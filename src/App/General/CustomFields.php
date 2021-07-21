@@ -78,7 +78,7 @@ class CustomFields extends Base {
 	 */
 	public function register() {
 
-		$is_read_only = false;
+		$is_read_only = true;
 
 		$fields = [
 			Field::make( 'text', 'name', __( 'Name', 'wp-action-network-events' ) )
@@ -87,8 +87,9 @@ class CustomFields extends Base {
 			Field::make( 'rich_text', 'instructions', __( 'Instructions', 'wp-action-network-events' ) )
 				->set_visible_in_rest_api( $visible = true )
 				->set_attribute( 'readOnly', $is_read_only ),
-			Field::make( 'date_time', 'start_date', __( 'Start', 'wp-action-network-events' ) )
+			Field::make( 'text', 'start_date', __( 'Start', 'wp-action-network-events' ) )
 				->set_visible_in_rest_api( $visible = true )
+				->set_attribute( 'readOnly', $is_read_only )
 				->set_classes( 'read-only' ),
 			Field::make( 'text', 'accepted', __( 'RSVPd', 'wp-action-network-events' ) )
 				->set_visible_in_rest_api( $visible = true )
@@ -134,8 +135,9 @@ class CustomFields extends Base {
 			Field::make( 'text', 'an_campaign_id', __( 'Campaign ID', 'wp-action-network-events' ) )
 				->set_visible_in_rest_api( $visible = true )
 				->set_attribute( 'readOnly', $is_read_only ),
-			Field::make( 'date_time', 'modified_date', __( 'Modified Date', 'wp-action-network-events' ) )
+			Field::make( 'text', 'modified_date', __( 'Modified Date', 'wp-action-network-events' ) )
 				->set_visible_in_rest_api( $visible = true )
+				->set_attribute( 'readOnly', $is_read_only )
 				->set_classes( 'read-only' ),
 			Field::make( 'text', 'status', __( 'Status', 'wp-action-network-events' ) )
 				->set_visible_in_rest_api( $visible = true )
