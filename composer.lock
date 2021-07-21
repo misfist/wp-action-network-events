@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fc45fb30923e10d14fd4e790ef710dc5",
+    "content-hash": "c244e9400d414940a1b29cf0c7e4dd32",
     "packages": [
         {
             "name": "htmlburger/carbon-field-number",
@@ -208,7 +208,7 @@
             "version": "3.3",
             "source": {
                 "type": "git",
-                "url": "https://github.com/misfist/carbon-field-rest-api-select.git",
+                "url": "https://github.com/misfist/carbon-field-rest-api-select/archive/refs/heads/main.zip",
                 "reference": "main"
             },
             "type": "library"
