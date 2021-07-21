@@ -1,0 +1,28 @@
+{
+    "name": "debtcollective/wp-action-network-events",
+    "description": "Sync and display events from Action Network.",
+    "type": "wordpress-plugin",
+    "license": "GPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Debt Collective",
+            "email": "pea@misfist.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "WpActionNetworkEvents\\": "src/"
+        }
+    },
+    "require": {
+        "htmlburger/carbon-fields": "^3.3",
+        "tgmpa/tgm-plugin-activation": "^2.6"
+    },
+    "require-dev": {
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
+        "wp-coding-standards/wpcs": "*",
+        "automattic/phpcs-neutron-ruleset": "^3.3",
+        "phpcompatibility/phpcompatibility-wp": "^2.1",
+        "lucatume/wp-browser": "^3.0"
+    }
+}
