@@ -91,11 +91,12 @@ class PostTypes extends Base {
 			'insert_into_item'      => sprintf( /* translators: %s: post type title */ __( 'Insert into %s', 'wp-action-network-events' ), strtolower( $this::POST_TYPE['singular'] ) ),
 			'uploaded_to_this_item' => sprintf( /* translators: %s: post type title */ __( 'Uploaded to this %s', 'wp-action-network-events' ), strtolower( $this::POST_TYPE['singular'] ) ),
 			'filter_items_list'     => sprintf( /* translators: %s: post type title */ __( 'Filter %s list', 'wp-action-network-events' ), strtolower( $this::POST_TYPE['title'] ) ),
+			'featured_image'        => __( 'Featured Image', 'wp-action-network-events' ),
 		);
 		$args = array(
 			'label'                 => $this::POST_TYPE['title'],
 			'labels'                => $labels,
-			'supports'              => array( 'title', 'editor', 'excerpt', 'featured-image', 'custom-fields' ),
+			'supports'              => array( 'title', 'editor', 'thumbnail', 'custom-fields' ),
 			'taxonomies'            => $this::POST_TYPE['taxonomies'],
 			'hierarchical'          => false,
 			'public'                => true,

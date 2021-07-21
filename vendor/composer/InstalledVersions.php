@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '9311f422cf3710d20efd333abca4e3e22be366d0',
+    'reference' => 'c8b52c4297d287cc7f751dff5b61f0c0f5746b63',
     'name' => 'debtcollective/wp-action-network-events',
   ),
   'versions' => 
@@ -123,7 +123,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '9311f422cf3710d20efd333abca4e3e22be366d0',
+      'reference' => 'c8b52c4297d287cc7f751dff5b61f0c0f5746b63',
     ),
     'dg/mysql-dump' => 
     array (
@@ -169,6 +169,15 @@ private static $installed = array (
       array (
       ),
       'reference' => 'b4cbd9b67ed3ef5672ec79d8e0c46d24bd844abd',
+    ),
+    'htmlburger/carbon-field-number' => 
+    array (
+      'pretty_version' => 'v3.0.0',
+      'version' => '3.0.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '3bddfaf256472d6071c62e566d011e1f2cdae0c6',
     ),
     'htmlburger/carbon-fields' => 
     array (
@@ -246,6 +255,15 @@ private static $installed = array (
         0 => '2.0.1',
       ),
     ),
+    'misfist/carbon-field-rest-api-select' => 
+    array (
+      'pretty_version' => '3.3',
+      'version' => '3.3.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'main',
+    ),
     'mustache/mustache' => 
     array (
       'pretty_version' => 'v2.13.0',
@@ -279,12 +297,12 @@ private static $installed = array (
     ),
     'nikic/php-parser' => 
     array (
-      'pretty_version' => 'v4.11.0',
-      'version' => '4.11.0.0',
+      'pretty_version' => 'v4.12.0',
+      'version' => '4.12.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'fe14cf3672a149364fb66dfe11bf6549af899f94',
+      'reference' => '6608f01670c3cc5079e18c1dab1104e002579143',
     ),
     'phar-io/manifest' => 
     array (
@@ -324,12 +342,12 @@ private static $installed = array (
     ),
     'phpcompatibility/phpcompatibility-wp' => 
     array (
-      'pretty_version' => '2.1.1',
-      'version' => '2.1.1.0',
+      'pretty_version' => '2.1.2',
+      'version' => '2.1.2.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'b7dc0cd7a8f767ccac5e7637550ea1c50a67b09e',
+      'reference' => 'a792ab623069f0ce971b2417edef8d9632e32f75',
     ),
     'phpdocumentor/reflection-common' => 
     array (

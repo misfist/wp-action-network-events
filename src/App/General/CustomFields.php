@@ -78,59 +78,71 @@ class CustomFields extends Base {
 	 */
 	public function register() {
 
+		$is_read_only = false;
+
 		$fields = [
 			Field::make( 'text', 'name', __( 'Name', 'wp-action-network-events' ) )
 				->set_visible_in_rest_api( $visible = true )
-				->set_attribute( 'readOnly', true ),
-			Field::make( 'textarea', 'instructions', __( 'Instructions', 'wp-action-network-events' ) )
+				->set_attribute( 'readOnly', $is_read_only ),
+			Field::make( 'rich_text', 'instructions', __( 'Instructions', 'wp-action-network-events' ) )
 				->set_visible_in_rest_api( $visible = true )
-				->set_attribute( 'readOnly', true ),
+				->set_attribute( 'readOnly', $is_read_only ),
 			Field::make( 'date_time', 'start_date', __( 'Start', 'wp-action-network-events' ) )
 				->set_visible_in_rest_api( $visible = true )
-				->set_classes( 'hidden' ),
+				->set_classes( 'read-only' ),
+			Field::make( 'text', 'accepted', __( 'RSVPd', 'wp-action-network-events' ) )
+				->set_visible_in_rest_api( $visible = true )
+				->set_attribute( 'type', 'number' )
+				->set_attribute( 'readOnly', $is_read_only ),
 
 			Field::make( 'separator', 'separator', __( 'Location', 'wp-action-network-events' ) ),
 			Field::make( 'text', 'location_venue', __( 'Venue', 'wp-action-network-events' ) )
 				->set_visible_in_rest_api( $visible = true )
-				->set_attribute( 'readOnly', true ),
+				->set_attribute( 'readOnly', $is_read_only ),
+			Field::make( 'text', 'location_locality', __( 'Locality', 'wp-action-network-events' ) )
+				->set_visible_in_rest_api( $visible = true )
+				->set_attribute( 'readOnly', $is_read_only ),
 			Field::make( 'text', 'location_address', __( 'Address', 'wp-action-network-events' ) )
 				->set_visible_in_rest_api( $visible = true )
-				->set_attribute( 'readOnly', true ),
+				->set_attribute( 'readOnly', $is_read_only ),
 			Field::make( 'text', 'location_postal_code', __( 'Postal Code', 'wp-action-network-events' ) )
 				->set_visible_in_rest_api( $visible = true )
-				->set_attribute( 'readOnly', true ),
+				->set_attribute( 'readOnly', $is_read_only ),
 			Field::make( 'text', 'location_region', __( 'Region', 'wp-action-network-events' ) )
 				->set_visible_in_rest_api( $visible = true )
-				->set_attribute( 'readOnly', true ),
+				->set_attribute( 'readOnly', $is_read_only ),
 			Field::make( 'text', 'location_country', __( 'Country', 'wp-action-network-events' ) )
 				->set_visible_in_rest_api( $visible = true )
-				->set_attribute( 'readOnly', true ),
+				->set_attribute( 'readOnly', $is_read_only ),
 			Field::make( 'text', 'location_longitude', __( 'Longitude', 'wp-action-network-events' ) )
 				->set_visible_in_rest_api( $visible = true )
-				->set_attribute( 'readOnly', true ),
+				->set_attribute( 'readOnly', $is_read_only ),
 			Field::make( 'text', 'location_latitude', __( 'Latitude', 'wp-action-network-events' ) )
 				->set_visible_in_rest_api( $visible = true )
-				->set_attribute( 'readOnly', true ),
+				->set_attribute( 'readOnly', $is_read_only ),
 			Field::make( 'text', 'location_accuracy', __( 'Accuracy', 'wp-action-network-events' ) )
 				->set_visible_in_rest_api( $visible = true )
-				->set_attribute( 'readOnly', true ),
+				->set_attribute( 'readOnly', $is_read_only ),
 			Field::make( 'text', 'browser_url', __( 'URL', 'wp-action-network-events' ) )
 				->set_visible_in_rest_api( $visible = true )
-				->set_attribute( 'readOnly', true )
+				->set_attribute( 'readOnly', $is_read_only )
 				->set_attribute( 'type', 'url' ),
 
-			Field::make( 'text', 'ap_id', __( 'ID', 'wp-action-network-events' ) )
+			Field::make( 'text', 'an_id', __( 'ID', 'wp-action-network-events' ) )
 				->set_visible_in_rest_api( $visible = true )
-				->set_attribute( 'readOnly', true ),
+				->set_attribute( 'readOnly', $is_read_only ),
+			Field::make( 'text', 'an_campaign_id', __( 'Campaign ID', 'wp-action-network-events' ) )
+				->set_visible_in_rest_api( $visible = true )
+				->set_attribute( 'readOnly', $is_read_only ),
 			Field::make( 'date_time', 'modified_date', __( 'Modified Date', 'wp-action-network-events' ) )
 				->set_visible_in_rest_api( $visible = true )
-				->set_classes( 'hidden' ),
+				->set_classes( 'read-only' ),
 			Field::make( 'text', 'status', __( 'Status', 'wp-action-network-events' ) )
 				->set_visible_in_rest_api( $visible = true )
-				->set_attribute( 'readOnly', true ),
+				->set_attribute( 'readOnly', $is_read_only ),
 			Field::make( 'text', 'visibility', __( 'Visibility', 'wp-action-network-events' ) )
 				->set_visible_in_rest_api( $visible = true )
-				->set_attribute( 'readOnly', true ),
+				->set_attribute( 'readOnly', $is_read_only ),
 		];
 
 

@@ -26,4 +26,5 @@ return array(
     '41ac945ee97c4f5461ef1c0ccb568262' => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/utils.php',
     'a708c649c455d50aa08b5043a5737509' => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/wp-polyfills.php',
     'a5f882d89ab791a139cd2d37e50cdd80' => $vendorDir . '/tgmpa/tgm-plugin-activation/class-tgm-plugin-activation.php',
+    '6632f90381dd49c5fe745d09406b9abb' => $vendorDir . '/htmlburger/carbon-field-number/field.php',
 );

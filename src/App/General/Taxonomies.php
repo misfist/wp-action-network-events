@@ -27,9 +27,10 @@ class Taxonomies extends Base {
 		'id'       		=> 'event_type',
 		'archive'  		=> 'types',
 		'title'    		=> 'Event Types',
-		'singular' 		=> 'Action Network Event',
+		'singular' 		=> 'Event Type',
 		'icon'     		=> 'dashicons-calendar-alt',
-		'post_types' 	=> [ 'event' ]
+		'post_types' 	=> [ 'event' ],
+		'rest'			=> 'event-types'
 	];
 
 	/**
@@ -97,6 +98,7 @@ class Taxonomies extends Base {
 			'show_in_nav_menus'          => true,
 			'show_tagcloud'              => true,
 			'show_in_rest'               => true,
+			'rest_base'             	 => $this::TAXONOMY['rest'],
 		);
 		\register_taxonomy( 
 			$this::TAXONOMY['id'], 

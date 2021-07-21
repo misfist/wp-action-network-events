@@ -11,12 +11,15 @@
     ],
     "autoload": {
         "psr-4": {
-            "WpActionNetworkEvents\\": "src/"
+            "WpActionNetworkEvents\\": "src/",
+            "Carbon_Field_Rest_Api_Select\\": "core/"
         }
     },
     "require": {
-        "htmlburger/carbon-fields": "^3.3",
-        "tgmpa/tgm-plugin-activation": "^2.6"
+        "htmlburger/carbon-fields": "^3.0",
+        "misfist/carbon-field-rest-api-select": "^3.3",
+        "tgmpa/tgm-plugin-activation": "^2.6",
+        "htmlburger/carbon-field-number": "^3.0"
     },
     "require-dev": {
         "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
@@ -24,5 +27,19 @@
         "automattic/phpcs-neutron-ruleset": "^3.3",
         "phpcompatibility/phpcompatibility-wp": "^2.1",
         "lucatume/wp-browser": "^3.0"
-    }
+    },
+    "repositories": [
+        {
+            "type":"package",
+            "package": {
+              "name": "misfist/carbon-field-rest-api-select",
+              "version":"3.3",
+              "source": {
+                  "url": "https://github.com/misfist/carbon-field-rest-api-select.git",
+                  "type": "git",
+                  "reference":"main"
+                }
+            }
+        }
+    ]
 }

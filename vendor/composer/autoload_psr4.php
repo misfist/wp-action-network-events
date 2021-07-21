@@ -52,5 +52,7 @@ return array(
     'Codeception\\Extension\\' => array($vendorDir . '/codeception/codeception/ext'),
     'Codeception\\' => array($vendorDir . '/codeception/codeception/src/Codeception', $vendorDir . '/codeception/stub/src', $vendorDir . '/lucatume/wp-browser/src/Codeception'),
     'Carbon_Fields\\' => array($vendorDir . '/htmlburger/carbon-fields/core'),
+    'Carbon_Field_Rest_Api_Select\\' => array($baseDir . '/core'),
+    'Carbon_Field_Number\\' => array($vendorDir . '/htmlburger/carbon-field-number/core'),
     'Carbon\\' => array($vendorDir . '/nesbot/carbon/src/Carbon'),
 );
