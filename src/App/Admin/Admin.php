@@ -11,6 +11,8 @@
  */
 namespace WpActionNetworkEvents\App\Admin;
 
+use WpActionNetworkEvents\Common\Abstracts\Base;
+use WpActionNetworkEvents\App\Admin\Options;
 
 /**
  * The admin-specific functionality of the plugin.
@@ -22,38 +24,31 @@ namespace WpActionNetworkEvents\App\Admin;
  * @subpackage Wp_Action_Network_Events/admin
  * @author     Debt Collective <pea@misfist.com>
  */
-class Admin {
+class Admin extends Base {
 
 	/**
-	 * The ID of this plugin.
+	 * Constructor.
 	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      string    $plugin_name    The ID of this plugin.
+	 * @since 1.0.0
 	 */
-	private $plugin_name;
+	public function __construct( $version, $plugin_name ) {
+		parent::__construct( $version, $plugin_name );
+		$this->init();
+	}
 
 	/**
-	 * The version of this plugin.
+	 * Initialize the class.
 	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
+	 * @since 0.1.0
 	 */
-	private $version;
-
-	/**
-	 * Initialize the class and set its properties.
-	 *
-	 * @since    1.0.0
-	 * @param      string    $plugin_name       The name of this plugin.
-	 * @param      string    $version    The version of this plugin.
-	 */
-	public function __construct( $plugin_name, $version ) {
-
-		$this->plugin_name = $plugin_name;
-		$this->version = $version;
-
+	public function init() {
+		/**
+		 * This general class is always being instantiated as requested in the Bootstrap class
+		 *
+		 * @see Bootstrap::__construct
+		 *
+		 */
+		new Options( $this->version, $this->plugin_name );
 	}
 
 	/**
@@ -61,7 +56,7 @@ class Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_styles() {
+	public function enqueueStyles() {
 
 		/**
 		 * This function is provided for demonstration purposes only.
@@ -75,7 +70,7 @@ class Admin {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/src/css/admin.css', array(), $this->version, 'all' );
+		\wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/src/css/admin.css', array(), $this->version, 'all' );
 
 	}
 
@@ -84,7 +79,7 @@ class Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_scripts() {
+	public function enqueueScripts() {
 
 		/**
 		 * This function is provided for demonstration purposes only.
@@ -98,7 +93,7 @@ class Admin {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/src/js/admin.js', array( 'jquery' ), $this->version, false );
+		\wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/src/js/admin.js', array( 'jquery' ), $this->version, false );
 
 	}
 
