@@ -28,6 +28,7 @@ class Taxonomies extends Base {
 		'archive'  		=> 'types',
 		'title'    		=> 'Event Types',
 		'singular' 		=> 'Event Type',
+		'menu'			=> 'Types',
 		'icon'     		=> 'dashicons-calendar-alt',
 		'post_types' 	=> [ 'event' ],
 		'rest'			=> 'event-types'
