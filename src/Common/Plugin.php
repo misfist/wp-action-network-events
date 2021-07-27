@@ -80,7 +80,7 @@ class Plugin {
 	 * @param string $version
 	 * @param string $plugin_name
 	 */
-	public function __construct( $version = '1.0.0', $plugin_name = 'wp-action-network-events' ) {
+	public function __construct( $version, $plugin_name ) {
 		$this->version = $version;
 		$this->plugin_name = $plugin_name;
 		// $this::instantiate();
@@ -188,7 +188,7 @@ class Plugin {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new Admin( $this->version, $this->plugin_name );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
@@ -204,7 +204,7 @@ class Plugin {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new Frontend( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new Frontend( $this->version, $this->plugin_name );
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
