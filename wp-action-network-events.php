@@ -38,9 +38,9 @@ require_once( 'vendor/autoload.php' );
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-const PLUGIN_NAME = 'wp-action-network-events';
-const PLUGIN_VERSION = '1.0.0';
-
+const WPANE_PLUGIN_NAME = 'wp-action-network-events';
+const WPANE_PLUGIN_VERSION = '1.0.0';
+define( 'WPANE_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
 /**
  * The code that runs during plugin activation.
@@ -79,6 +79,6 @@ register_deactivation_hook( __FILE__, 'deactivate_wp_action_network_events' );
  * @since    1.0.0
  */
 function init() {
-	$plugin = new \WpActionNetworkEvents\Common\Plugin( null, PLUGIN_NAME );
+	$plugin = new \WpActionNetworkEvents\Common\Plugin( WPANE_PLUGIN_VERSION, WPANE_PLUGIN_NAME );
 }
 init();
