@@ -11,9 +11,11 @@ namespace WpActionNetworkEvents\App\General;
 
 use WpActionNetworkEvents\Common\Abstracts\Base;
 use WpActionNetworkEvents\App\General\Taxonomies;
+use WpActionNetworkEvents\App\General\PostTypes;
 
 use Carbon_Fields\Container;
 use Carbon_Fields\Field;
+use Carbon_Fields\Helper\Helper;
 
 /**
  * Class CustomFields
@@ -24,16 +26,20 @@ use Carbon_Fields\Field;
 class CustomFields extends Base {
 
 	/**
-	 * Taxonomy data
+	 * Metabox Container ID
+	 * 
+	 * @since 1.0.0
 	 */
-	public const POST_TYPE = [
-		'id'       		=> 'event',
-		'archive'  		=> 'events',
-		'menu'    		=> 'Action Network',
-		'title'    		=> 'Events',
-		'singular' 		=> 'Event',
-		'icon'     		=> 'dashicons-calendar-alt',
-		'taxonomies'	=> [ 'event_type' ],
+	public const CONTAINER_ID = 'wp_action_network_fields';
+
+	public const FIELDS = [
+		[
+			'name'		=> '',
+			'label'		=> '',
+			'type'		=> '',
+			'text_type'	=> null,
+			'api_prop'	=> ''
+		],
 	];
 
 	/**
@@ -87,6 +93,10 @@ class CustomFields extends Base {
 			Field::make( 'rich_text', 'instructions', __( 'Instructions', 'wp-action-network-events' ) )
 				->set_visible_in_rest_api( $visible = true )
 				->set_attribute( 'readOnly', $is_read_only ),
+			Field::make( 'text', 'browser_url', __( 'URL', 'wp-action-network-events' ) )
+				->set_visible_in_rest_api( $visible = true )
+				->set_attribute( 'readOnly', $is_read_only )
+				->set_attribute( 'type', 'url' ),
 			Field::make( 'text', 'start_date', __( 'Start', 'wp-action-network-events' ) )
 				->set_visible_in_rest_api( $visible = true )
 				->set_attribute( 'readOnly', $is_read_only )
@@ -96,7 +106,28 @@ class CustomFields extends Base {
 				->set_attribute( 'type', 'number' )
 				->set_attribute( 'readOnly', $is_read_only ),
 
-			Field::make( 'separator', 'separator', __( 'Location', 'wp-action-network-events' ) ),
+			Field::make( 'text', 'total_events', __( 'Total Events', 'wp-action-network-events' ) )
+				->set_visible_in_rest_api( $visible = true )
+				->set_attribute( 'readOnly', $is_read_only )
+				->set_attribute( 'type', 'number' ),
+			Field::make( 'text', 'total_rsvps', __( 'Total RSVPs', 'wp-action-network-events' ) )
+				->set_visible_in_rest_api( $visible = true )
+				->set_attribute( 'readOnly', $is_read_only )
+				->set_attribute( 'type', 'number' ),
+			
+			Field::make( 'separator', 'separator_host', __( 'Host Details', 'wp-action-network-events' ) ),
+			Field::make( 'rich_text', 'host_pitch', __( 'Host Pitch', 'wp-action-network-events' ) )
+				->set_visible_in_rest_api( $visible = true )
+				->set_attribute( 'readOnly', $is_read_only ),
+			Field::make( 'rich_text', 'host_instructions', __( 'Host Instructions', 'wp-action-network-events' ) )
+				->set_visible_in_rest_api( $visible = true )
+				->set_attribute( 'readOnly', $is_read_only ),
+			Field::make( 'text', 'host_url', __( 'Host URL', 'wp-action-network-events' ) )
+				->set_visible_in_rest_api( $visible = true )
+				->set_attribute( 'readOnly', $is_read_only )
+				->set_attribute( 'type', 'url' ),
+
+			Field::make( 'separator', 'separator_location', __( 'Location Detail', 'wp-action-network-events' ) ),
 			Field::make( 'text', 'location_venue', __( 'Venue', 'wp-action-network-events' ) )
 				->set_visible_in_rest_api( $visible = true )
 				->set_attribute( 'readOnly', $is_read_only ),
@@ -124,15 +155,24 @@ class CustomFields extends Base {
 			Field::make( 'text', 'location_accuracy', __( 'Accuracy', 'wp-action-network-events' ) )
 				->set_visible_in_rest_api( $visible = true )
 				->set_attribute( 'readOnly', $is_read_only ),
-			Field::make( 'text', 'browser_url', __( 'URL', 'wp-action-network-events' ) )
-				->set_visible_in_rest_api( $visible = true )
-				->set_attribute( 'readOnly', $is_read_only )
-				->set_attribute( 'type', 'url' ),
-
-			Field::make( 'text', 'an_id', __( 'ID', 'wp-action-network-events' ) )
+			
+			Field::make( 'separator', 'separator_campaign', __( 'Campaign Details', 'wp-action-network-events' ) ),
+			Field::make( 'text', 'an_campaign_id', __( 'Campaign ID', 'wp-action-network-events' ) )
 				->set_visible_in_rest_api( $visible = true )
 				->set_attribute( 'readOnly', $is_read_only ),
-			Field::make( 'text', 'an_campaign_id', __( 'Campaign ID', 'wp-action-network-events' ) )
+			Field::make( 'text', 'campaign_events', __( 'Events', 'wp-action-network-events' ) )
+				->set_visible_in_rest_api( $visible = true )
+				->set_attribute( 'type', 'url' ),
+			Field::make( 'text', 'campaign_type', __( 'Campaign Type', 'wp-action-network-events' ) )
+				->set_visible_in_rest_api( $visible = true )
+				->set_attribute( 'readOnly', $is_read_only ),
+			Field::make( 'text', 'total_outreaches', __( 'Total Outreaches', 'wp-action-network-events' ) )
+				->set_visible_in_rest_api( $visible = true )
+				->set_attribute( 'readOnly', $is_read_only )
+				->set_attribute( 'type', 'number' ),
+
+			Field::make( 'separator', 'separator_misc', __( 'Misc Details', 'wp-action-network-events' ) ),
+			Field::make( 'text', 'an_id', __( 'ID', 'wp-action-network-events' ) )
 				->set_visible_in_rest_api( $visible = true )
 				->set_attribute( 'readOnly', $is_read_only ),
 			Field::make( 'text', 'modified_date', __( 'Modified Date', 'wp-action-network-events' ) )
@@ -147,10 +187,39 @@ class CustomFields extends Base {
 				->set_attribute( 'readOnly', $is_read_only ),
 		];
 
-
-		Container::make( 'post_meta', __( 'Event Details', 'wp-action-network-events' ) )
-			->where( 'post_type', '=', 'event' )
+		Container::make( 
+			'post_meta',
+			self::CONTAINER_ID,
+			__( 'Event Details', 'wp-action-network-events' ) 
+		)
+			->where( 'post_type', '=', PostTypes::POST_TYPE['id'] )
 			->set_context( 'advanced' )
 			->add_fields( $fields );
 	}
+
+	public function makeFields() {
+		$fields = [];
+		foreach( self::FIELDS as $field ) {
+			switch( $field) {
+				case $field['text_type'] :
+					$fields[] = Field::make( $field['type'], $field['name'], __( $field['label'], 'wp-action-network-events' ) )
+						->set_visible_in_rest_api( $visible = true )
+						->set_attribute( 'readOnly', $is_read_only )
+						->set_attribute( 'type', $field['text_type'] );
+					break;
+				case 'separator' === $field['type'] :
+					$fields[] = Field::make( $field['type'], $field['name'], __( $field['label'], 'wp-action-network-events' ) );
+					break;
+				default :
+					$fields[] = Field::make( $field['type'], $field['name'], __( $field['label'], 'wp-action-network-events' ) )
+						->set_visible_in_rest_api( $visible = true )
+						->set_attribute( 'readOnly', $is_read_only );
+					break;
+			}
+		}
+		return $fields;
+
+	}
+
+	public static function getFields() {}
 }

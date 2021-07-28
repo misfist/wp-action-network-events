@@ -50,7 +50,7 @@ abstract class Base {
 	 *
 	 * @since 1.0.0
 	 */
-	public function __construct( $version = '1.0.0', $plugin_name ) {
+	public function __construct( $version , $plugin_name ) {
 		$this->version = $version;
 		$this->plugin_name = $plugin_name;
 		// $this->init();
@@ -59,7 +59,7 @@ abstract class Base {
 
 	/**
 	 * @return self
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	final public static function instantiate(): self {
 		if ( ! self::$instance ) {

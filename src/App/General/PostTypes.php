@@ -24,7 +24,7 @@ class PostTypes extends Base {
 	 * Taxonomy data
 	 */
 	public const POST_TYPE = [
-		'id'       		=> 'event',
+		'id'       		=> 'an_event',
 		'archive'  		=> 'events',
 		'menu'    		=> 'Action Network',
 		'title'    		=> 'Events',

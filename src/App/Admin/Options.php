@@ -33,6 +33,13 @@ class Options extends Base {
 	const OPTIONS_NAME = 'wp_action_network_events_options';
 
 	/**
+	 * ID of Options page
+	 *
+	 * @var string
+	 */
+	protected $options_page_name = 'options-wp-action-network-events';
+
+	/**
 	 * Plugin Options
 	 *
 	 * @var array
@@ -70,6 +77,7 @@ class Options extends Base {
 		 */
 		$this->setOptions();
 		\add_action( 'admin_menu', 			array( $this, 'addAdminMenu' ) );
+		\add_action( 'admin_notices', 		array( $this, 'renderAdminNotices' ) );
 		\add_action( 'admin_init', 			array( $this, 'initSettings'  ) );
 		\add_filter( 'plugin_action_links_' . WPANE_PLUGIN_BASENAME, array( $this, 'addSettingsLink' ), 10, 5 );
 
@@ -93,7 +101,7 @@ class Options extends Base {
 			\esc_html__( 'Action Network Events Settings', 'wp-action-network-events' ),
 			\esc_html__( 'Action Network Events', 'wp-action-network-events' ),
 			'activate_plugins',
-			'options-wp-action-network-events',
+			$this->options_page_name,
 			array( $this, 'renderPage' )
 		);
 
@@ -102,7 +110,7 @@ class Options extends Base {
 			\esc_html__( 'Action Network Events Settings', 'wp-action-network-events' ),
 			\esc_html__( 'Settings', 'wp-action-network-events' ),
 			'activate_plugins',
-			'options-wp-action-network-events',
+			$this->options_page_name,
 			array( $this, 'renderPage' )
 		);
 
@@ -121,12 +129,31 @@ class Options extends Base {
 		$link = array( 
 			'settings' => sprintf( 
 				'<a href="%s">%s</a>',
-				esc_url( 'options-general.php?page=options-wp-action-network-events' ),
+				esc_url( "options-general.php?page={$this->options_page_name}" ),
 				esc_attr__( 'Settings', 'wp-action-network-events' )
 			),
 		);
 			
 		return array_merge( $link, $actions );
+	}
+
+	/**
+	 * Render Notices on Options page
+	 *
+	 * @return void
+	 */
+	public function renderAdminNotices() {
+		$screen = get_current_screen();
+		// Only render this notice in the post editor.
+		if ( ! $screen || "settings_page_{$this->options_page_name}" !== $screen->base ) {
+			return;
+		}
+
+		?>
+		<div class="notice notice-info is-dismissible">
+			<p><?php _e( 'Manual Sync Button Coming Soon!', 'wp-action-network-events' ); ?></p>
+		</div>
+		<?php
 	}
 
 	/**
@@ -148,6 +175,13 @@ class Options extends Base {
 			'wp_action_network_events_options'
 		);
 
+		\add_settings_field(
+			'base_url',
+			\__( 'Action Network Base URL', 'wp-action-network-events' ),
+			array( $this, 'renderBaseUrlField' ),
+			'wp_action_network_events_options',
+			'wp_action_network_events_options_section'
+		);
 		\add_settings_field(
 			'api_key',
 			\__( 'Action Network API Key', 'wp-action-network-events' ),
@@ -202,13 +236,26 @@ class Options extends Base {
 	 *
 	 * @return void
 	 */
+	function renderBaseUrlField() {
+
+		$value = isset( $this->options['base_url'] ) ? $this->options['base_url'] : esc_url( 'https://actionnetwork.org/api/v2/' );
+
+		echo '<input type="url" name="wp_action_network_events_options[base_url]" class="regular-text base_url_field" placeholder="' . esc_attr__( '', 'wp-action-network-events' ) . '" value="' . esc_attr( $value ) . '">';
+
+	}
+
+	/**
+	 * Render Field
+	 *
+	 * @return void
+	 */
 	function renderApiKeyField() {
 
 		// $options = \get_option( 'wp_action_network_events_options' );
 
 		$value = isset( $this->options['api_key'] ) ? $this->options['api_key'] : '';
 
-		echo '<input type="password" name="wp_action_network_events_options[api_key]" class="regular-text api_key_field" placeholder="' . esc_attr__( '', 'wp-action-network-events' ) . '" value="' . esc_attr( $value ) . '">';
+		echo '<input type="text" name="wp_action_network_events_options[api_key]" class="regular-text api_key_field" placeholder="' . esc_attr__( '', 'wp-action-network-events' ) . '" value="' . esc_attr( $value ) . '">';
 
 	}
 
@@ -262,24 +309,24 @@ class Options extends Base {
 	}
 
 	/**
-	 * Get Event Types
-	 *
-	 * @return void
-	 */
-	public function getEventTypeOptions() : array {
-		return $this->eventTypeOptions;
-	}
-
-	/**
 	 * Set Event Types
 	 * Event Type options that will be displayed on the options page
 	 *
 	 * @param array $types
 	 * @return void
 	 */
-	public function setEventTypeOptions( array $types ) : array {
+	public function setEventTypeOptions( array ...$types ) : array {
 		// $this->types = $types;
-		$this->eventTypeOptions = $types;
+		$this->eventTypeOptions = array_push( $types );
+	}
+
+	/**
+	 * Get Event Types
+	 *
+	 * @return void
+	 */
+	public static function getEventTypeOptions() : array {
+		return $this->eventTypeOptions;
 	}
 
 	/**
@@ -300,7 +347,7 @@ class Options extends Base {
 	 *
 	 * @return mixed array || false
 	 */
-	function getOptions() {
+	static function getOptions() {
 		return \get_option( self::OPTIONS_NAME );
 	}
 
@@ -310,6 +357,6 @@ class Options extends Base {
 	 * @return void
 	 */
 	function setOptions() {
-		$this->options = $this->getOptions();
+		$this->options = self::getOptions();
 	}
 }
