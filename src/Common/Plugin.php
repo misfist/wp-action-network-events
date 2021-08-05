@@ -14,13 +14,15 @@
  */
 namespace WpActionNetworkEvents\Common;
 
-use \WpActionNetworkEvents\App\Admin\Admin;
-use \WpActionNetworkEvents\App\Frontend\Frontend;
-use \WpActionNetworkEvents\Common\Loader;
-use \WpActionNetworkEvents\Common\I18n;
+use WpActionNetworkEvents\App\Admin\Admin;
+use WpActionNetworkEvents\App\Frontend\Frontend;
+use WpActionNetworkEvents\Common\Loader;
+use WpActionNetworkEvents\Common\I18n;
 use WpActionNetworkEvents\App\General\PostTypes;
-use WpActionNetworkEvents\App\General\Taxonomies;
+use WpActionNetworkEvents\App\General\ContentFilters;
+use WpActionNetworkEvents\App\General\Taxonomies\Taxonomies;
 use WpActionNetworkEvents\App\General\CustomFields;
+use WpActionNetworkEvents\App\Blocks\Blocks;
 
 /**
  * The core plugin class.
@@ -158,8 +160,15 @@ class Plugin {
 
 		new Taxonomies( $this->version, $this->plugin_name );
 
+		new ContentFilters( $this->version, $this->plugin_name );
+
 		new CustomFields( $this->version, $this->plugin_name );
 
+		new Blocks( $this->version, $this->plugin_name );
+
+
+		// $events = new GetEvents();
+		// $events->fetchData();
 	}
 
 	/**

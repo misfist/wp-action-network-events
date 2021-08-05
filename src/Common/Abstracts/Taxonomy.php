@@ -4,13 +4,11 @@
  *
  * @package   WP_Action_Network_Events
  */
-
 declare( strict_types = 1 );
 
-namespace WpActionNetworkEvents\App\General;
+namespace WpActionNetworkEvents\Common\Abstracts;
 
 use WpActionNetworkEvents\Common\Abstracts\Base;
-use WpActionNetworkEvents\App\General\PostTypes;
 
 /**
  * Class Taxonomies
@@ -18,21 +16,12 @@ use WpActionNetworkEvents\App\General\PostTypes;
  * @package WpActionNetworkEvents\App\General
  * @since 0.1.0
  */
-class Taxonomies extends Base {
+abstract class Taxonomy extends Base {
 
 	/**
 	 * Taxonomy data
 	 */
-	public const TAXONOMY = [
-		'id'       		=> 'event_type',
-		'archive'  		=> 'types',
-		'title'    		=> 'Event Types',
-		'singular' 		=> 'Event Type',
-		'menu'			=> 'Types',
-		'icon'     		=> 'dashicons-calendar-alt',
-		'post_types' 	=> [ 'event' ],
-		'rest'			=> 'event-types'
-	];
+	public const TAXONOMY = self::TAXONOMY;
 
 	/**
 	 * Constructor.
@@ -58,6 +47,7 @@ class Taxonomies extends Base {
 		 */
 
 		add_action( 'init', [ $this, 'register' ] );
+
 	}
 
 	/**
@@ -104,7 +94,7 @@ class Taxonomies extends Base {
 		\register_taxonomy( 
 			$this::TAXONOMY['id'], 
 			$this::TAXONOMY['post_types'], 
-			\apply_filters( 'WpActionNetworkEvents\App\General\Taxonomies\Args', $args ) 
+			\apply_filters( \get_class( $this ) . '\Args', $args ) 
 		);
 	}
 }

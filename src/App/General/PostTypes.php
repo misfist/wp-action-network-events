@@ -10,7 +10,7 @@ declare( strict_types = 1 );
 namespace WpActionNetworkEvents\App\General;
 
 use WpActionNetworkEvents\Common\Abstracts\Base;
-use WpActionNetworkEvents\App\General\Taxonomies;
+use WpActionNetworkEvents\App\General\Taxonomies\Taxonomies;
 
 /**
  * Class PostTypes
