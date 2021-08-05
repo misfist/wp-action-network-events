@@ -10,7 +10,7 @@ declare( strict_types = 1 );
 namespace WpActionNetworkEvents\App\General;
 
 use WpActionNetworkEvents\Common\Abstracts\Base;
-use WpActionNetworkEvents\App\General\Taxonomies;
+use WpActionNetworkEvents\App\General\Taxonomies\Taxonomies;
 use WpActionNetworkEvents\App\General\PostTypes;
 
 use Carbon_Fields\Container;
@@ -84,7 +84,7 @@ class CustomFields extends Base {
 	 */
 	public function register() {
 
-		$is_read_only = true;
+		$is_read_only = false;
 
 		$fields = [
 			Field::make( 'text', 'name', __( 'Name', 'wp-action-network-events' ) )
@@ -99,8 +99,7 @@ class CustomFields extends Base {
 				->set_attribute( 'type', 'url' ),
 			Field::make( 'text', 'start_date', __( 'Start', 'wp-action-network-events' ) )
 				->set_visible_in_rest_api( $visible = true )
-				->set_attribute( 'readOnly', $is_read_only )
-				->set_classes( 'read-only' ),
+				->set_attribute( 'readOnly', $is_read_only ),
 			Field::make( 'text', 'accepted', __( 'RSVPd', 'wp-action-network-events' ) )
 				->set_visible_in_rest_api( $visible = true )
 				->set_attribute( 'type', 'number' )
@@ -177,8 +176,7 @@ class CustomFields extends Base {
 				->set_attribute( 'readOnly', $is_read_only ),
 			Field::make( 'text', 'modified_date', __( 'Modified Date', 'wp-action-network-events' ) )
 				->set_visible_in_rest_api( $visible = true )
-				->set_attribute( 'readOnly', $is_read_only )
-				->set_classes( 'read-only' ),
+				->set_attribute( 'readOnly', $is_read_only ),
 			Field::make( 'text', 'status', __( 'Status', 'wp-action-network-events' ) )
 				->set_visible_in_rest_api( $visible = true )
 				->set_attribute( 'readOnly', $is_read_only ),
