@@ -84,7 +84,6 @@ class Options extends Base {
 		$this->eventTypeOptions = apply_filters( 
 			__NAMESPACE__ . '\Options\eventTypeOptions',
 			[
-				'campaign-events'	=> \esc_attr__( 'Campaign Events', 'wp-action-network-events' ),
 				'events'			=> \esc_attr__( 'Events', 'wp-action-network-events' ),
 			]
 		);
