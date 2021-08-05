@@ -80,5 +80,6 @@ register_deactivation_hook( __FILE__, 'deactivate_wp_action_network_events' );
  */
 function init() {
 	$plugin = new \WpActionNetworkEvents\Common\Plugin( WPANE_PLUGIN_VERSION, WPANE_PLUGIN_NAME );
+	return $plugin;
 }
 init();
