@@ -41,8 +41,8 @@ class Patterns extends Base {
 		 * @see Bootstrap::__construct
 		 *
 		 */
-		\add_action( 'init', [ $this, 'register_block_pattern_category' ] );
 		\add_action( 'init', [ $this, 'register_block_patterns' ] );
+		\add_action( 'init', [ $this, 'register_block_pattern_category' ] );
 	}
 
 	/**
@@ -53,7 +53,7 @@ class Patterns extends Base {
 	 * @return void
 	 */
 	function register_block_pattern_category() {
-		register_block_pattern_category(
+		\register_block_pattern_category(
 			'events',
 			[ 
 				'label' => __( 'Events', 'wp-action-network-events' ) 
@@ -69,52 +69,40 @@ class Patterns extends Base {
 	 * @return void
 	 */
 	public function register_block_patterns() {
-		// $patterns = [
-		// 	[
-		// 		$this->plugin_name . '/events-list-detailed',
-		// 		array(
-		// 			'title'      => _x( 'Events List - Detailed', 'wp-action-network-events' ),
-		// 			'blockTypes' => array( 'core/query' ),
-		// 			'categories' => array( 'query' ),
-		// 			'content'    => '<!-- wp:query {"query":{"perPage":3,"pages":0,"offset":0,"postType":"an_event","categoryIds":[],"tagIds":[],"order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"exclude","inherit":false},"displayLayout":{"type":"flex","columns":3}} -->
-		// 							<div class="wp-block-query">
-		// 							<!-- wp:post-template -->
-		// 							<!-- wp:group {"style":{"spacing":{"padding":{"top":"30px","right":"30px","bottom":"30px","left":"30px"}}},"layout":{"inherit":false}} -->
-		// 							<div class="wp-block-group" style="padding-top:30px;padding-right:30px;padding-bottom:30px;padding-left:30px"><!-- wp:post-title {"isLink":true} /-->
-		// 							<!-- wp:post-excerpt /-->
-		// 							<!-- wp:post-date /--></div>
-		// 							<!-- /wp:group -->
-		// 							<!-- /wp:post-template -->
-		// 							</div>
-		// 							<!-- /wp:query -->',
-		// 		)
-		// 	]
-		// ];
 
-		// foreach( $patterns as $name => $details ) {
-		// 	\register_block_pattern(
-		// 		$name,
-		// 		$details
-		// 	);
-		// }
+		$query_id = uniqid();
+
+		$content = '<!-- wp:group {"className":"events"} -->
+		<div class="wp-block-group events"><!-- wp:heading {"placeholder":"Add a Section Heading...","className":"events__heading"} -->
+		<h2 class="events__heading"></h2>
+		<!-- /wp:heading -->
+		
+		<!-- wp:paragraph {"placeholder":"Add a short description...","className":"events__description"} -->
+		<p class="events__description"></p>
+		<!-- /wp:paragraph -->
+		
+		<!-- wp:query {"queryId":3,"query":{"perPage":3,"pages":0,"offset":0,"postType":"an_event","tagIds":[],"order":"desc","orderBy":"date","inherit":false},"displayLayout":{"type":"flex","columns":3},"className":"events events__detailed"} -->
+		<div class="wp-block-query events events__detailed"><!-- wp:post-template {"className":"event"} -->
+		<!-- wp:post-title {"isLink":true,"className":"event__title"} /-->
+		
+		<!-- wp:wp-action-network-events/event-date {"format":"F j, Y","className":"event__date"} /-->
+		
+		<!-- wp:wp-action-network-events/event-time {"format":"g:i a","className":"event__time"} /-->
+		
+		<!-- wp:wp-action-network-events/event-location {"className":"event__location"} /-->
+		<!-- /wp:post-template --></div>
+		<!-- /wp:query --></div>
+		<!-- /wp:group -->';
+
 		\register_block_pattern(
 			$this->plugin_name . '/events-list-detailed',
-				array(
-					'title'      => _x( 'Events List - Detailed', 'wp-action-network-events' ),
-					'blockTypes' => array( 'core/query' ),
-					'categories' => array( 'query' ),
-					'content'    => '<!-- wp:query {"query":{"perPage":3,"pages":1,"offset":0,"postType":"an_event","categoryIds":[],"tagIds":[],"order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"exclude","inherit":false},"displayLayout":{"type":"flex","columns":3}} -->
-									<div class="wp-block-query">
-									<!-- wp:post-template -->
-									<!-- wp:group {"layout":{"inherit":false}} -->
-									<div class="wp-block-group"><!-- wp:post-title {"isLink":true} /-->
-									<!-- wp:post-featured-image /-->
-									<!-- wp:post-excerpt /--></div>
-									<!-- /wp:group -->
-									<!-- /wp:post-template -->
-									</div>
-									<!-- /wp:query -->',
-				)
+				[
+					'title'      	=> \_x( 'Events List', 'wp-action-network-events' ),
+					'blockTypes' 	=> [ 'core/query', 'core/post-template', 'core/post-title' ],
+					'categories' 	=> [ 'query', 'events' ],
+					'keywords'		=> [ 'action network', 'events' ],
+					'content'    	=> $content,
+				]
 		); 
 	}
 

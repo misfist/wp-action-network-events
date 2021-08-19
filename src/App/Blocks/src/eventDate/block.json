@@ -1,0 +1,33 @@
+{
+	"apiVersion": 2,
+	"name": "wp-action-network-events/event-date",
+	"title": "Event Date",
+	"category": "theme",
+	"description": "Display event date in event query.",
+	"textdomain": "wp-action-network-events",
+	"attributes": {
+		"format": {
+			"type": "string"
+		}
+	},
+	"usesContext": [ "postId", "postType", "queryId" ],
+	"parent": [ "core/post-template" ],
+	"supports": {
+		"html": false,
+		"color": {
+			"gradients": false,
+			"link": false,
+			"text": false,
+			"background": false
+		},
+		"typography": {
+			"fontSize": false,
+			"lineHeight": false,
+			"__experimentalFontWeight": false
+		}
+	},
+	"script": "wp-action-network-events",
+	"style": "file:../../build/style-index.css",
+	"editorScript": "file:../../build/index.js",
+	"editorStyle": "file:../../build/index.css"
+}

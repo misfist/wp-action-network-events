@@ -63,21 +63,78 @@ class Meta extends Base {
 	 * @return void
 	 */
 	public function register() {
+		$query_id = \uniqid();
 
-		Block::make( __( 'My Shiny Gutenberg Block', 'wp-action-network-events' ) )
-			->set_category( 'common' )
+		$template = [
+			[ 'core/heading', [
+				'level'			=> 2,
+				'placeholder'	=> __( 'Add a Section Header...', 'wp-action-network-events' ),
+				'className'		=> 'section-heading'
+			], [] ],
+			[ 'core/paragraph', [
+				'placeholder'	=> __( 'Add a section description...', 'wp-action-network-events' ),
+				'className'		=> 'section-description'
+			], [] ],
+			[ 'core/query', [
+				'query'			=> [
+					'queryId'	=> $query_id,
+					'postType'	=> 'an_event',
+					'perPage'	=> 3,
+					'inherit'	=> false,
+					'orderBy'	=> 'meta_value',
+					'metaKey'	=> '_start_date'
+				],
+				'displayLayout'	=> [
+					'type'		=> 'flex',
+					'columns'	=> 3
+				]
+			], [
+				[ 'core/post-template', [], [
+					[ 'core/post-title', [
+						'isLink'		=> true,
+						'className'		=> 'event-title'
+					], [] ],
+					[ 'wp-action-network-events/event-date', [ 
+						'attributes' => [ 
+							'format' => 'F j, Y' 
+						] 
+					], [] ],
+					[ 'wp-action-network-events/event-time', [ 
+						'attributes' => [ 
+							'format' => 'g:i a' 
+						] 
+					], [] ],
+					[ 'wp-action-network-events/event-location', [], [] ]
+				] ]
+			] ],
+		];
+
+		// {\"query\":{\"perPage\":3,\"pages\":0,\"offset\":0,\"postType\":\"an_event\",\"tagIds\":[],\"order\":\"desc\",\"orderBy\":\"date\",\"inherit\":false},\"displayLayout\":{\"type\":\"flex\",\"columns\":3}}
+
+		Block::make( __( 'Events Query', 'wp-action-network-events' ) )
+			->set_category( 'events' )
 			->set_icon( 'grid-view' )
 			->set_keywords( [ 
 				__( 'grid', 'wp-action-network-events' ), 
 				__( 'events', 'wp-action-network-events' ), 
 				__( 'basic', 'wp-action-network-events' ) 
 			] )
-			->set_parent( 'core/query' )
 			->add_fields( array(
-				Field::make( 'text', 'heading', __( 'Block Heading', 'wp-action-network-events' ) ),
-				Field::make( 'image', 'image', __( 'Block Image', 'wp-action-network-events' ) ),
-				Field::make( 'rich_text', 'content', __( 'Block Content', 'wp-action-network-events' ) ),
+				Field::make( 'association', 'event_tag', __( 'Event Tag', 'wp-action-network-events' ) )
+					->set_types( [
+						[
+							'type'      	=> 'term',
+							'taxonomy' 		=> 'event_tag',
+						]
+					] 
+				),
+				Field::make( 'text', 'posts_per_page', __( 'Number of Posts', 'wp-action-network-events' ) )
+					->set_attribute( 'type', 'number' )
+					->set_default_value( 3 )
 			) )
+			->set_inner_blocks( true )
+			->set_inner_blocks_position( 'below' )
+			->set_inner_blocks_template( $template )
 			->set_render_callback( function ( $fields, $attributes, $inner_blocks ) {
 				var_dump( $fields, $attributes, $inner_blocks  );
 				?>

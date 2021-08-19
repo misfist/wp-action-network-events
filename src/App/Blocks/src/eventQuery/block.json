@@ -1,0 +1,66 @@
+{
+	"apiVersion": 2,
+	"name": "wp-action-network-events/event-query",
+	"title": "Events Query (custom)",
+	"category": "theme",
+	"description": "Display an event query.",
+	"textdomain": "wp-action-network-events",
+	"attributes": {
+		"queryId": {
+			"type": "number"
+		},
+		"query": {
+			"type": "object",
+			"perPage": 3,
+			"pages": 0,
+			"offset": 0,
+			"postType": "an_event",
+			"order": "desc",
+			"orderby": "meta_value",
+			"meta_key": "_start_date",
+			"taxonomy": "event_tag",
+			"event-tags": "",
+
+			"default": {
+				"perPage": 3,
+				"pages": 0,
+				"offset": 0,
+				"postType": "an_event",
+				"order": "desc",
+				"orderby": "meta_value",
+				"meta_key": "_start_date",
+				"taxonomy": "event_tag",
+				"event-tags": ""
+			}
+		},
+		"layout": {
+			"type": "object",
+			"default": {
+				"type": "grid"
+			}
+		}
+	},
+	"providesContext": {
+		"queryId": "queryId",
+		"query": "query",
+		"layout": "layout"
+	},
+	"supports": {
+		"html": false,
+		"color": {
+			"gradients": false,
+			"link": false,
+			"text": false,
+			"background": false
+		},
+		"typography": {
+			"fontSize": false,
+			"lineHeight": false,
+			"__experimentalFontWeight": false
+		}
+	},
+	"script": "wp-action-network-events",
+	"style": "file:../../build/style-index.css",
+	"editorScript": "file:../../build/index.js",
+	"editorStyle": "file:../../build/index.css"
+}
