@@ -64,8 +64,9 @@ class CustomFields extends Base {
 		 * @see Bootstrap::__construct
 		 *
 		 */
-		add_action( 'plugins_loaded', 					[ $this, 'load' ] );
-		add_action( 'carbon_fields_register_fields', 	[ $this, 'register' ] );
+		\add_action( 'plugins_loaded', 					[ $this, 'load' ] );
+		\add_action( 'init',							[ $this, 'registerPostMeta' ] );
+		\add_action( 'carbon_fields_register_fields', 	[ $this, 'addFields' ] );
 	}
 
 	/**
@@ -78,11 +79,11 @@ class CustomFields extends Base {
 	}
 
 	/**
-	 * Register fields
+	 * Add Custom Fields
 	 *
 	 * @since 0.1.0
 	 */
-	public function register() {
+	public function addFields() {
 
 		$is_read_only = false;
 
@@ -217,6 +218,26 @@ class CustomFields extends Base {
 		}
 		return $fields;
 
+	}
+
+	public function registerPostMeta() {
+		\register_post_meta(
+			'an_event', 
+			'_start_date', [
+				'show_in_rest' 	=> true,
+				'single' 		=> true,
+				'type' 			=> 'string',
+			]
+		);
+
+		\register_post_meta(
+			'an_event', 
+			'_location_venue', [
+				'show_in_rest' 	=> true,
+				'single' 		=> true,
+				'type' 			=> 'string',
+			]
+		);
 	}
 
 	public static function getFields() {}
