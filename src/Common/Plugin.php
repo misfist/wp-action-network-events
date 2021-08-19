@@ -22,6 +22,7 @@ use WpActionNetworkEvents\App\General\PostTypes;
 use WpActionNetworkEvents\App\General\ContentFilters;
 use WpActionNetworkEvents\App\General\Taxonomies\Taxonomies;
 use WpActionNetworkEvents\App\General\CustomFields;
+use WpActionNetworkEvents\App\Integration\RestFilters;
 use WpActionNetworkEvents\App\Blocks\Blocks;
 
 /**
@@ -163,6 +164,8 @@ class Plugin {
 		new ContentFilters( $this->version, $this->plugin_name );
 
 		new CustomFields( $this->version, $this->plugin_name );
+
+		new RestFilters( $this->version, $this->plugin_name );
 
 		new Blocks( $this->version, $this->plugin_name );
 
